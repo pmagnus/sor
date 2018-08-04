@@ -1,6 +1,13 @@
 # sor-adaptor
 
-FIXME
+## http://filer.nsi.dk/sor/data/sor/sorcsv/v_1_2_1_19/
+
+sor.csv
+
+## http://filer.nsi.dk/sor/data/sor/sorxml/v_2_0_0/
+
+sor.zip
+
 
 ## Usage
 
