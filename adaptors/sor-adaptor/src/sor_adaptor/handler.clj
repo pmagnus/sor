@@ -1,14 +1,8 @@
 (ns sor-adaptor.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
+            [sor-adaptor.import :refer [get-sor get-random-sor]]
             [schema.core :as s]))
-
-(s/defschema Pizza
-  {:name s/Str
-   (s/optional-key :description) s/Str
-   :size (s/enum :L :M :S)
-   :origin {:country (s/enum :FI :PO)
-            :city s/Str}})
 
 (def app
   (api
@@ -16,20 +10,17 @@
      {:ui "/"
       :spec "/swagger.json"
       :data {:info {:title "Sor-adaptor"
-                    :description "Compojure Api example"}
-             :tags [{:name "api", :description "some apis"}]}}}
+                    :description "Sor adaptor Api"}
+             :tags [{:name "api", :description "sor apis"}]}}}
 
     (context "/api" []
       :tags ["api"]
 
-      (GET "/plus" []
-        :return {:result Long}
-        :query-params [x :- Long, y :- Long]
-        :summary "adds two numbers together"
-        (ok {:result (+ x y)}))
+      (GET "/random-sor" []
+        :summary "Return random sor info"
+        (ok (get-random-sor)))
 
-      (POST "/echo" []
-        :return Pizza
-        :body [pizza Pizza]
-        :summary "echoes a Pizza"
-        (ok pizza)))))
+      (GET "/sor" []
+        :query-params [sor :- String]
+        :summary "Return sor info"
+        (ok (get-sor sor))))))

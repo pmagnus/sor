@@ -35,9 +35,19 @@
     (println "  Diff reload sor csv file...")
     (diff sor-map base)))
 
+
+(defn get-sor [sor]
+  (sor-1 sor))
+
+(defn get-random-sor []
+  (get sor-1 (rand-nth (keys sor-1))))
+
 (comment
   (count sor-1)
   (first sor-1)
+
+  (get-sor "197331000016003")
+  (get-random-sor)
 
   (time (def raw-file (fetch-sor-csv-file)))
   (time (def parsed (parse-csv raw-file :delimiter \;)))
